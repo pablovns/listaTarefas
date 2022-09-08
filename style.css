@@ -1,0 +1,12 @@
+h1 {
+    border-bottom-style: inset;
+}
+
+.tarefaSelecionada {
+    color: red;
+    font-style: italic;
+}
+
+.tarefaNormal {
+    color: black;
+}
