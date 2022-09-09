@@ -15,23 +15,24 @@ frm.addEventListener("submit", (e) => {
     frm.inTarefa.focus();
 });
 
-let j = 0; // tarefa selecionada
+let j = -1; // tarefa selecionada
 frm.btSelecionar.addEventListener("click", () => {
+    if (j == -1) {
+        j = 0;
+    }
+
     const tarefas = document.querySelectorAll("h5");
 
     if (tarefas.length == 0) {
         alert("Não há tarefas para selecionar.");
         return;
-    };
+    }
 
     // percorrer a lista de elementos h5 inseridos na página
     for (let i = 0; i < tarefas.length; i++) {
         const x = tarefas[i];
-
-        console.log(i);
-
-        x.setAttribute("class", "tarefaNormal")
-    };
+        x.setAttribute("class", "tarefaNormal");
+    }
 
     tarefas[j].setAttribute("class", "tarefaSelecionada");
     if (j >= tarefas.length - 1) {
@@ -39,4 +40,32 @@ frm.btSelecionar.addEventListener("click", () => {
     } else {
         j++;
     }
+    
+    console.log(tarefas);
+});
+
+frm.btRetirar.addEventListener("click", () => {
+    const tarefas = document.querySelectorAll("h5");
+
+    if (tarefas.length == 0 || j == -1) {
+        alert("A lista de tarefas está vazia.");
+        return;
+    }
+
+    j = 0;
+
+    // deselelecionar o resto e selecionar o primeiro
+    for (let i = 0; i < tarefas.length; i++) {
+        const x = tarefas[i];
+        if (x.getAttribute("class") == "tarefaSelecionada") {
+            x.remove();
+        }
+    }
+
+    for (let i = 0; i < tarefas.length; i++) {
+        const x = tarefas[i];
+        x.setAttribute("class", "tarefaNormal");
+    }
+
+    tarefas[j].setAttribute("class", "tarefaSelecionada");
 });
