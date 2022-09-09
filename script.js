@@ -40,8 +40,6 @@ frm.btSelecionar.addEventListener("click", () => {
     } else {
         j++;
     }
-    
-    console.log(tarefas);
 });
 
 frm.btRetirar.addEventListener("click", () => {
@@ -54,7 +52,7 @@ frm.btRetirar.addEventListener("click", () => {
 
     j = 0;
 
-    // deselelecionar o resto e selecionar o primeiro
+    // remover a tarefa selecionada
     for (let i = 0; i < tarefas.length; i++) {
         const x = tarefas[i];
         if (x.getAttribute("class") == "tarefaSelecionada") {
@@ -62,10 +60,12 @@ frm.btRetirar.addEventListener("click", () => {
         }
     }
 
+    // resetar o contador da tarefa selecionada
     for (let i = 0; i < tarefas.length; i++) {
         const x = tarefas[i];
         x.setAttribute("class", "tarefaNormal");
     }
 
+    // selecionar a primeira
     tarefas[j].setAttribute("class", "tarefaSelecionada");
 });
