@@ -50,22 +50,36 @@ frm.btRetirar.addEventListener("click", () => {
         return;
     }
 
-    j = 0;
-
     // remover a tarefa selecionada
-    for (let i = 0; i < tarefas.length; i++) {
-        const x = tarefas[i];
-        if (x.getAttribute("class") == "tarefaSelecionada") {
-            x.remove();
+    tarefas.forEach((element) => {
+        if (element.getAttribute("class") == "tarefaSelecionada") {
+            if (confirm(`Confirma a exclusão de "${element.innerText}?"`)) {
+                divQuadro.removeChild(element);
+            }
         }
-    }
+    });
 
     // resetar o contador da tarefa selecionada
-    for (let i = 0; i < tarefas.length; i++) {
-        const x = tarefas[i];
-        x.setAttribute("class", "tarefaNormal");
-    }
+    tarefas.forEach(element => {
+        element.setAttribute("class", "tarefaNormal");
+    });
 
     // selecionar a primeira
-    tarefas[j].setAttribute("class", "tarefaSelecionada");
+    tarefas[0].setAttribute("class", "tarefaSelecionada");
+});
+
+frm.btGravar.addEventListener("click", () => {
+    const fs = require("fs");
+
+    const file = fs.createWriteStream("./tarefas.txt");
+
+    file.on("error", (err) => {
+        alert("Ocorreu um erro ao gravar a lista, tente novamente.");
+    });
+
+    tarefas.forEach((v) => {
+        file.write(`${v} \n`);
+    });
+
+    file.end();
 });
