@@ -2,6 +2,7 @@
 const frm = document.querySelector("form");
 const divQuadro = document.getElementById("divQuadro");
 
+
 frm.addEventListener("submit", (e) => {
     e.preventDefault(); // evita o envio do formulário vazio
     const tarefa = frm.inTarefa.value; // obtém o conteúdo digitado
@@ -69,17 +70,5 @@ frm.btRetirar.addEventListener("click", () => {
 });
 
 frm.btGravar.addEventListener("click", () => {
-    const fs = require("fs");
-
-    const file = fs.createWriteStream("./tarefas.txt");
-
-    file.on("error", (err) => {
-        alert("Ocorreu um erro ao gravar a lista, tente novamente.");
-    });
-
-    tarefas.forEach((v) => {
-        file.write(`${v} \n`);
-    });
-
-    file.end();
+    
 });
